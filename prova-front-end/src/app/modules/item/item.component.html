@@ -1,0 +1,31 @@
+<div class="list-group">
+    <label
+        class="list-group-item" 
+        [style.margin-left.rem]="1 * obj.level"
+        [title]="obj.name"
+    >
+        <input
+            class="form-check-input me-1"
+            type="checkbox"
+            (change)="toggleInput(checked)"
+            [checked]="obj.checked"
+        />
+        {{obj.name}}
+    </label>
+
+    <button
+        [ngClass]="{'collapsed': !obj.open}"
+        *ngIf="hasChildren"
+        (click)="toogleOpenNode()"
+    ></button>
+</div>
+
+<div
+    *ngIf="obj.open"
+>
+    <app-item
+        *ngFor="let item of obj.children | keyvalue"
+        [item]="item"
+        [ParentsId]="arrayParentsId"
+    ></app-item>
+</div>
